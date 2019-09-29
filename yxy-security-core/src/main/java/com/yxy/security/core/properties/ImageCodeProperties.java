@@ -9,13 +9,13 @@ package com.yxy.security.core.properties;
  * @Copyright: 2019 www.ti-t.cn Inc. All rights reserved.
  * 注意：本内容仅限于福建创昱达信息技术有限公司内部传阅，禁止外泄以及用于其他的商业目
  **/
-public class ImageCodeProperties {
+public class ImageCodeProperties extends SmsCodeProperties{
     private int width = 67; //验证码图片宽
     private int height = 23;//验证码图片高
-    private int length = 4;//验证码长度
-    private int expireIn = 60;//验证码失效时间
 
-    private String url="";//要验证的路径
+    public ImageCodeProperties() {
+        setLength(4);
+    }
 
     public int getWidth() {
         return width;
@@ -31,29 +31,5 @@ public class ImageCodeProperties {
 
     public void setHeight(int height) {
         this.height = height;
-    }
-
-    public int getLength() {
-        return length;
-    }
-
-    public void setLength(int length) {
-        this.length = length;
-    }
-
-    public int getExpireIn() {
-        return expireIn;
-    }
-
-    public void setExpireIn(int expireIn) {
-        this.expireIn = expireIn;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
     }
 }

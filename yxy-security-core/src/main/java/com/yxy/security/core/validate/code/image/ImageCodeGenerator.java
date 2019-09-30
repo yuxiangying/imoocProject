@@ -1,6 +1,7 @@
-package com.yxy.security.core.validate.code;
+package com.yxy.security.core.validate.code.image;
 
 import com.yxy.security.core.properties.SecurityProperties;
+import com.yxy.security.core.validate.code.ValidateCodeGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.ServletRequestUtils;
 import org.springframework.web.context.request.ServletWebRequest;
@@ -50,7 +51,7 @@ public class ImageCodeGenerator implements ValidateCodeGenerator {
             g.setColor(new Color(20 + random.nextInt(110), 20 + random.nextInt(110), 20 + random.nextInt(110)));
             g.drawString(rand, 13 * i + 6, 16);
         }
-
+        System.out.println("验证码为："+sRand);
         g.dispose();
 
         return new ImageCode(image, sRand, securityProperties.getCode().getImage().getExpireIn());

@@ -1,6 +1,7 @@
 package com.yxy.security.core.validate.code;
 
 import com.yxy.security.core.properties.SecurityProperties;
+import com.yxy.security.core.validate.code.image.ImageCodeGenerator;
 import com.yxy.security.core.validate.code.sms.DefaultSmsCodeSender;
 import com.yxy.security.core.validate.code.sms.SmsCodeSender;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,15 +25,15 @@ public class ValidateCodeBeanConfig {
 
     @Bean
     @ConditionalOnMissingBean(name = "imageCodeGenerator")
-    public ValidateCodeGenerator imageCodeGenerator(){
+    public ValidateCodeGenerator imageCodeGenerator(){//方法的名字就是spring容器中bean的名字
         ImageCodeGenerator codeGenerator = new ImageCodeGenerator();
         codeGenerator.setSecurityProperties(securityProperties);
         return codeGenerator;
     }
 
     @Bean
-    @ConditionalOnMissingBean(SmsCodeSender.class)
-    public SmsCodeSender smsCodeGenerator(){
+    @ConditionalOnMissingBean(SmsCodeSender.class)//当容器中找到了SmsCodeSender的实现就不会再用此实现bean
+    public SmsCodeSender smsCodeSender(){//方法的名字就是spring容器中bean的名字
         //此处省略生成器过程
         return new DefaultSmsCodeSender();
     }

@@ -1,4 +1,6 @@
-package com.yxy.security.core.validate.code;
+package com.yxy.security.core.validate.code.image;
+
+import com.yxy.security.core.validate.code.ValidateCode;
 
 import java.awt.image.BufferedImage;
 import java.time.LocalDateTime;

@@ -1,15 +1,12 @@
-package com.yxy.security.core.validate.code;
+package com.yxy.security.core.validate.code.sms;
 
 import com.yxy.security.core.properties.SecurityProperties;
+import com.yxy.security.core.validate.code.ValidateCode;
+import com.yxy.security.core.validate.code.ValidateCodeGenerator;
 import org.apache.commons.lang.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.ServletRequestUtils;
 import org.springframework.web.context.request.ServletWebRequest;
-
-import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.util.Random;
 
 /**
  * @author 余想英

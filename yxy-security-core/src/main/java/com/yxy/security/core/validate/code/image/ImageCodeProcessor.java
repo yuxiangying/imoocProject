@@ -14,7 +14,7 @@ import java.awt.*;
  * @Description:TODO(图形验证码处理器)
  * @date: 2019年09月30日 10:18
  **/
-@Component("imageCodeProcessor")
+@Component("imageValidateCodeProcessor")
 public class ImageCodeProcessor extends AbstractValidateCodeProcessor<ImageCode> {
     //发送图形验证码，将其写到响应中
     @Override

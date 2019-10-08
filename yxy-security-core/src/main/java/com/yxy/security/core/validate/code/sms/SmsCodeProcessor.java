@@ -16,7 +16,7 @@ import javax.servlet.ServletRequest;
  * @Description:TODO(短信验证码处理器)
  * @date: 2019年09月30日 10:24
  **/
-@Component("smsCodeProcessor")
+@Component("smsValidateCodeProcessor")
 public class SmsCodeProcessor extends AbstractValidateCodeProcessor<ValidateCode> {
     //短信验证码发送器
     @Autowired

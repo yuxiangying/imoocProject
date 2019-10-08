@@ -1,6 +1,8 @@
 package com.yxy.security.browser;
 
+import com.yxy.security.core.authentication.mobile.SmsCodeAuthenticationSecurityConfig;
 import com.yxy.security.core.properties.SecurityProperties;
+import com.yxy.security.core.validate.code.SmsCodeFilter;
 import com.yxy.security.core.validate.code.ValidateCodeFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -44,6 +46,9 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private UserDetailsService userDetailsService;
 
+    @Autowired
+    private SmsCodeAuthenticationSecurityConfig smsCodeAuthenticationSecurityConfig;
+
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -65,7 +70,14 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
         validateCodeFilter.setSecurityProperties(securityProperties);
         validateCodeFilter.afterPropertiesSet();
 
-        http.addFilterBefore(validateCodeFilter,UsernamePasswordAuthenticationFilter.class)
+
+        SmsCodeFilter smsCodeFilter = new SmsCodeFilter();
+        smsCodeFilter.setAuthenticationFailureHandler(yxyAuthenticationFailureHandler);
+        smsCodeFilter.setSecurityProperties(securityProperties);
+        smsCodeFilter.afterPropertiesSet();
+
+        http.addFilterBefore(smsCodeFilter,UsernamePasswordAuthenticationFilter.class)
+            .addFilterBefore(validateCodeFilter,UsernamePasswordAuthenticationFilter.class)
             .formLogin()
                 .loginPage("/authentication/require")
                 .loginProcessingUrl("/authentication/form")
@@ -84,6 +96,7 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest()
                 .authenticated()
                 .and()
-                .csrf().disable();
+                .csrf().disable()
+                .apply(smsCodeAuthenticationSecurityConfig);
     }
 }

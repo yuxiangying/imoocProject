@@ -1,9 +1,7 @@
 package com.yxy.code;
 
-import ch.qos.logback.core.net.SyslogOutputStream;
-import com.yxy.security.core.validate.code.ImageCode;
 import com.yxy.security.core.validate.code.ValidateCodeGenerator;
-import org.springframework.stereotype.Component;
+import com.yxy.security.core.validate.code.image.ImageCode;
 import org.springframework.web.context.request.ServletWebRequest;
 
 /**
